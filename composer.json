@@ -1,0 +1,18 @@
+{
+	"name": "zen/xhe",
+    "description": "Common interface for XHE clients",
+    "keywords": ["human emulator"],
+    "authors": [
+        {
+            "name": "Ggg"
+        }
+    ],
+	"require": {
+        "php": "^7.4 || ^8.0"
+    },
+	"autoload": {
+        "psr-4": {
+            "Xhe\\Client\\": "src/"
+        }
+    }
+}
