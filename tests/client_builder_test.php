@@ -18,3 +18,9 @@ $command = function() {
 if ( ! $result = request($command, $client) )
 	printf("Error during request!\n");
 
+//$app->pause();
+//$app->stop_script();
+
+$app->enable_quit(true);
+$app->exitapp();
+$app->quit();

@@ -1,0 +1,1 @@
+"C:\XWeb\Human Emulator Studio 7.0.60\XWeb Human Emulator Studio RT.exe" /ip:"localhost" /port:"8999" /script:"C:\XWeb\Human Emulator Studio 7.0.60\My Scripts\test.php" /script_args:"IVAN" /in_tray:"true" & ping -n -f -w 1 5000 192.168.254.254 >nul

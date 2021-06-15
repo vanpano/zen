@@ -29,19 +29,22 @@ class ClientLauncher {
 		return $this;
 	}
 	
+	
+	// Not finished...
 	public static function launch($delay = 3, $async = false) {
 		if ( ! $async !== TRUE );
-			//do smth...
+			//do smth asyncly...
 		
 		if ($delay > 0) {
 			for($i = 0; $i < $delay; $i++)
 				sleep(1);
 		}
 		
-		$command = ;
+		$bat = '';
+		$args = [];
 		
-		if ( ! $launched = launch($command) )
+		if ( ! $launched = launchBat($bat, $args) )
 			return;
-		return $launched
+		return $launched;
 	}
 }

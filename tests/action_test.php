@@ -27,3 +27,10 @@ $client = new \Xhe\Client\Client($ip, $port);
 
 if (! $result = request($command, $client))
 	printf("Some errors during request....\n");
+
+//$app->pause();
+//$app->stop_script();
+
+$app->enable_quit(true);
+$app->exitapp();
+$app->quit();

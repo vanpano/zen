@@ -1,6 +1,6 @@
 <?php
 
-namespace Xhe\Client;
+namespace Xhe\Command;
 		
 class Command {
 	protected $action;

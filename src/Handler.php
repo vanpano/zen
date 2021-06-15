@@ -1,6 +1,6 @@
 <?php
 
-namespace Xhe\Client;
+namespace Xhe\Handler;
 
 class Handler {
 	public $client;
@@ -18,7 +18,6 @@ class Handler {
 			$result = $Command->run($xhe_host);
 		else $result = $Command($xhe_host);
 		
-			
 		return $result;
 	}
 }
