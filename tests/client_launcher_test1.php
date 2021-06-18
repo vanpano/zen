@@ -10,19 +10,12 @@ $in_tray = 'yes';
 
 //BIN . DIRECTORY_SEPARATOR . 'run-client.bat';
 //str_replace(' ', '^ ', 'C:\XWeb\Human Emulator Studio 7.0.60\XWeb Human Emulator Studio RT.exe');
-$executable = BIN . DIRECTORY_SEPARATOR . 'run-client.bat';
+$executable = str_replace(' ', '^ ', 'C:\XWeb\Human Emulator Studio 7.0.60\XWeb Human Emulator Studio RT.exe');
+//BIN . DIRECTORY_SEPARATOR . 'run.cmd';
 
-// ? $args = compact('ip', 'port', 'script', 'script_args', 'in_tray');
-
-$args = [
-	'ip' => $ip,
-	'port' => $port,
-	'script' => $script,
-	'script_args' => $script_args,
-	'in_tray' => $in_tray
-];
-
-if ( ! $launched = launchBat($executable, $args))
+$command = $executable . " /port:\"" . $port . "\" /script:\"" . $script . "\" /script_args:\"" . $script_args . "\" /in_tray:\"" . $in_tray . "\"";
+var_dump($command);
+if ( ! $launched = launch($command))
 	printf("Achtung! Error during launch!\n");
 
 exit;

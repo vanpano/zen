@@ -8,11 +8,14 @@
         }
     ],
 	"require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0",
+		"thingengineer/mysqli-database-class": "dev-master"
     },
 	"autoload": {
         "psr-4": {
-            "Xhe\\Client\\": "src/"
+            "Xhe\\Client\\": "src/Client",
+            "Xhe\\Command\\": "src/Command",
+            "Xhe\\Handler\\": "src/Handler"
         }
     }
 }

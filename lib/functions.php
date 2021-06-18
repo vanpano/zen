@@ -14,62 +14,64 @@ function is_closure($t) {
     return $t instanceof Closure;
 }
 
-function isAssoc(array $arr) {
+function is_assoc(array $arr) {
 	if (array() === $arr) return false;
 	return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
-function launchBat($bat, $args, $ping = true) {
+function launch($command, $ping = true) {
 	if (!$ping)
-		$pingCommand = '';
-	else $pingCommand = 'ping -n -f -w 1 5000 192.168.254.254 >nul';
+		$pCommand = '';
+	else $pCommand = ' & ' . 'ping -n -f -w 1 5000 192.168.254.254 >nul';
 	
-	if (is_array($args))
-		$args = formatArgs($args);
-	
-	$command = ($bat . ' ' . (is_array($args) ? implode(' ', $args) : $args) . ($ping ? ' & ' . $pingCommand : ''));
-	
-	var_dump($command);
+	$command .= $pCommand;
 	
 	$handle = popen($command, 'w');
-	$read = fread($handle, 2096);
+	fread($handle, 2096);
 }
 
-function formatArgs($args) {
-	$new_args = (
-		(isset($args['ip']) ? '/ip:' . $args['ip'] . ' ': '') . 
-		(isset($args['port']) ? '/port:' . $args['port'] . ' ' : '') . 
-		(isset($args['script']) ? '/script:' . $args['script'] . ' ': '') . 
-		(
-			( 
-				isset($args['script_args']) ? is_array($args['script_args']) ?
-					'/script_args:' . implode(" ", $args['script_args']) . ' ' :
-					'/script_args:' . $args['script_args'] . ' ': ''
-			)
-		) . 
-		(isset($args['in_tray']) ? '/in_tray:' . $args['in_tray'] : '/in_tray:no')
-	);
-
-	$result = $new_args;
-	/*
-	$result = (
-		count($args) > 0 ? 
-			isAssoc($args) ? 
-				$new_args
-			: implode(' ', $args)
-		: ''
-	);*/
+function launchXhe($args) {
+	$exe = str_replace(' ', '^ ', XHE_EXE_RT);
+	$command = $exe . ' ' . _args($args);
 	
-	return $result;
+	launch($command);
 }
 
 
-// Not working...
-function xhe_finish() {	
-	//$app->pause();
-	//$app->stop_script();
+function _args($array) : string {
+	$args = '';
+	
+	if (!is_assoc($array) || !is_array($array)) {
+		printf("Arguments should be passed as an associate array!\n");
+		
+		return false;
+	}
+	
+	foreach($array as $key => $value) {
+		$args .= '/' . $key . ':' . '"' . $value . '"';
+		$args .= ' ';
+	}
+	
+	return $args;
+}
 
-	$app->enable_quit(true);
-	$app->exitapp();
-	$app->quit();
+function print_var_name($var) {
+    foreach($GLOBALS as $var_name => $value) {
+        if ($value === $var) {
+            return $var_name;
+        }
+    }
+
+    return false;
+}
+
+function get_xhe_port($settings_path) {
+	if (!realpath($settings_path))
+		return false;
+	
+	$port = (int) file_get_contents($settings_path . DIRECTORY_SEPARATOR . "port.txt");
+	
+	if (!$port)
+		return false;
+	return $port;
 }
